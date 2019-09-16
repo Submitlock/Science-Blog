@@ -1,0 +1,12 @@
+<app-spinner *ngIf="loading"></app-spinner>
+<div class="container my-5" *ngIf="!loading">
+    <div class="row">
+        <div class="col">
+            <app-post-form (emitContent)="onContentEmit($event)" [postID]="postID"></app-post-form>
+        </div>
+        <div class="col">
+            <h2 class="text-center">Your post preview</h2>
+            <app-view-post [post]="post" [showOptions]="false"></app-view-post>
+        </div>
+    </div>
+</div>

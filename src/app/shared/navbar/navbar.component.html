@@ -1,0 +1,24 @@
+<nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container">
+        <a class="navbar-brand" href="#" [routerLink]="['']"> <img src="assets/images/logo.png" alt="logo" width="50px"> </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse flex-row-reverse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#" [routerLink]="['']"> <b>HOME</b> </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link mx-3" href="#" [routerLink]="['blog']"> <b>BLOG</b> </a>
+                </li>
+                <li class="nav-item" *ngIf="!loggedUser">
+                    <a href="#" class="nav-link account-btn shadow" (click)="onShowModal($event)"> <b>ACCOUNT</b> </a>
+                </li>
+                <li class="nav-item" *ngIf="loggedUser">
+                    <a href="#" class="nav-link" (click)="onLogout()"> <b>LOG OUT</b> </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

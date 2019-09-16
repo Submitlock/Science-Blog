@@ -1,0 +1,6 @@
+<div *ngIf="!hideAlert" @slideInOut class="alert alert-dismissible" [ngClass]="'alert-' + class" role="alert">
+    <strong> <ng-content></ng-content>  </strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="hideAlert = true">
+      <span aria-hidden="true">&times;</span>
+    </button>
+</div>

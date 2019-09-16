@@ -1,0 +1,5 @@
+<div *ngIf="post" [innerHTML]="post | transformToHTML | safeHTML"></div>
+<div *ngIf="showOptions">
+    <button class="btn btn-primary" (click)="editPost()">Edit Post</button>
+    <button class="btn btn-danger" (click)="deletePost()">Delete Post</button>
+</div>

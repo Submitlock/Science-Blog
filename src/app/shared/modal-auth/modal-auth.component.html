@@ -1,0 +1,8 @@
+<div class="w-100 h-100 fixed-top d-flex align-items-center" @toggleModal *ngIf="showModal" (click)="onHideModal($event)">
+    <div class="card w-25 mx-auto position-relative bg-white shadow">
+        <div class="card-body">
+            <app-auth-form></app-auth-form>
+        </div>
+        <button class="btn btn-danger btn-sm position-absolute" (click)="onHideModal()">X</button>
+    </div>
+</div>

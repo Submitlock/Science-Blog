@@ -1,0 +1,16 @@
+.bg-shape {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 50%;
+    transform: translateY(-50%);
+}
+.w-100 {
+    margin-top: 200px;
+}
+.shape {
+    position: absolute;
+    right: 8%;
+    top: 15%;
+    animation: rotate 20s linear infinite;
+}

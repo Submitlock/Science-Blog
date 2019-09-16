@@ -1,0 +1,8 @@
+
+<div class="container my-5">
+    <app-posts-loop [posts]="posts | postsLoopByCategory"></app-posts-loop>
+
+    <br>
+    <br>
+    <button class="btn btn-primary" [routerLink]="['new']">Create a new Post!</button>
+</div>

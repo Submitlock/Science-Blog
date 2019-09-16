@@ -1,0 +1,87 @@
+.custom-pill {
+    background: #e8c678af;
+    color: #bb9232;
+    border-radius: 30px;
+    font-weight: bold;
+}
+.header-btn {
+    background: linear-gradient(to right, #90d9ba, #f5865e)!important;
+    color: white!important;
+    border-radius: 5px;
+    font-weight: bold;
+    border: none;
+    transition: .2s ease;
+    letter-spacing: 3px;
+    padding: 8px 10px;
+}
+.header-btn:hover {
+    transform: scale(.94);
+}
+.box {
+    position: relative;
+    overflow: hidden;
+}
+#header-boxes .col-4:nth-child(1) .box-float-circle {
+    position: absolute;
+    left: -50px;
+    top: -20px;
+}
+#header-boxes .col-4:nth-child(1) .box-float-boxes {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+#header-boxes .col-4:nth-child(2) .box-float-circle {
+    position: absolute;
+    right: -50px;
+    top: -20px;
+}
+#header-boxes .col-4:nth-child(2) .box-float-boxes {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+#header-boxes .col-4:nth-child(3) .box-float-circle {
+    position: absolute;
+    right: -50px;
+    bottom: -20px;
+}
+#header-boxes .col-4:nth-child(3) .box-float-boxes {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+.header-float {
+    position: absolute;
+    z-index: -1;
+}
+.header-float-1 {
+    left: 8%;
+    top: 0;
+    animation: rotate 20s linear infinite;
+}
+.header-float-2 {
+    left: 5%;
+    top: 50%;
+    animation: rotate 20s linear infinite;
+}
+.header-float-3 {
+    left: 35%;
+    top: 55%;
+    transform: rotate(150deg);
+}
+.header-float-4 {
+    right: 7%;
+    top: 15%;
+    animation: move-up-down 10s linear infinite;
+}
+.header-float-5 {
+    right: 10%;
+    bottom: 15%;
+    animation: rotate-y 10s linear infinite;
+}
+.header-float-6 {
+    left: 35%;
+    top: 0;
+    transform: rotate(50deg) scale(.8);
+}
