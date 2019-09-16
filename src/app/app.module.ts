@@ -32,6 +32,7 @@ import { SinglePostComponent } from './pages/blog/single-post/single-post.compon
 import { EditPostComponent } from './pages/blog/edit-post/edit-post.component';
 import { HeaderComponent } from './pages/home/header/header.component';
 import { HomeSectionCategoriesComponent } from './pages/home/home-section-categories/home-section-categories.component';
+import { CardCategoryComponent } from './pages/home/card-category/card-category.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { HomeSectionCategoriesComponent } from './pages/home/home-section-catego
     EditPostComponent,
     HeaderComponent,
     HomeSectionCategoriesComponent,
+    CardCategoryComponent,
   ],
   imports: [
     BrowserModule,

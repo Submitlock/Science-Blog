@@ -1,24 +1,24 @@
-import { query, style, animate, group, transition, trigger } from '@angular/animations';
+import { query, style, animate, group, transition, trigger, state } from '@angular/animations';
 
 export const toggleModal =
-trigger('toggleModal', [
-    transition(':enter', [
-        style({ opacity: 0 }),
-        group([
-            animate('.2s ease', style({ opacity: 1 })),
-            query('.card', [
-                style({ opacity: 0, transform: 'translateX(-300px)' }),
-                animate('.2s ease', style({ opacity: 1, transform: 'translateX(0px)' }))
+    trigger('toggleModal', [
+        transition(':enter', [
+            style({ opacity: 0 }),
+            group([
+                animate('.2s ease', style({ opacity: 1 })),
+                query('.card', [
+                    style({ opacity: 0, transform: 'translateX(-300px)' }),
+                    animate('.2s ease', style({ opacity: 1, transform: 'translateX(0px)' }))
+                ])
+            ])
+        ]),
+        transition(':leave', [
+            group([
+                query('.card', animate('.2s ease', style({ opacity: 0, transform: 'translateX(300px)' }))),
+                animate('.2s ease', style({ opacity: 0 }))
             ])
         ])
-    ]),
-    transition(':leave', [
-        group([
-            query('.card', animate('.2s ease', style({ opacity: 0, transform: 'translateX(300px)' }))),
-            animate('.2s ease', style({ opacity: 0 }))
-        ])
-    ])
-]);
+    ]);
 
 export const slideInOut =
     trigger('slideInOut', [
@@ -27,3 +27,14 @@ export const slideInOut =
             animate('1s ease', style({ transform: 'translateX(0px)' }))
         ]),
     ]);
+
+export const viewCategoryAnimation = 
+    trigger('viewCategoryAnimation', [
+        state('normal', style({left: 0, width: '100%'})),
+        state('hovered', style({right: 0, width: 0})),
+        transition('normal => hovered', animate('.4s ease')),
+        transition('hovered => normal', [
+            style({left: 0}),
+            animate('.4s ease')
+        ])
+    ])

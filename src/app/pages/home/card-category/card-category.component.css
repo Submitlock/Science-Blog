@@ -1,0 +1,33 @@
+.img-container {
+   border-radius: 50%;
+   width: 50px;
+   transition: .4s ease;
+}
+img {
+    width: 50px;
+    padding: 10px;
+}
+.card {
+    transition: .4s ease;
+}
+.card:hover {
+    transform: translateY(-5px);
+}
+.card:hover .img-container {
+    transform: rotateY(180deg);
+}
+a {
+    position: relative;
+    overflow: hidden;
+    width: 130px;
+}
+a:hover {
+    text-decoration: none;
+}
+span {
+    position: absolute;
+    bottom: 0;
+    height: 1px;
+    width: 100%;
+}
+

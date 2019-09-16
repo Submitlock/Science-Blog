@@ -1,0 +1,16 @@
+<div class="card shadow border-0 my-4">
+    <div class="card-body">
+        <div class="img-container" [ngStyle]="{ background: 'linear-gradient('+color+', white)' }">
+            <img [src]="img" alt="">
+        </div>
+        <ng-content></ng-content>
+        <a 
+            href="" 
+            [ngStyle]="{color: linkColor}"
+            (mouseenter)="onMouseEnter()"
+            (mouseleave)="onMouseLeave()">
+                View this category
+                <span [@viewCategoryAnimation]="linkAnimationState" [ngStyle]="{background: linkColor}"></span> 
+        </a>
+    </div>
+</div>
