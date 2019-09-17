@@ -6,4 +6,74 @@
     top: 0;
     right: 0;
 }
+/* MODAL */
+.card {
+    min-height: 480px;
+    border: none;
+}
 
+.form-container {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.sign-in-container {
+    z-index: 2;
+}
+.sign-up-container {
+    opacity: 0;
+    z-index: 1;
+}
+.form {
+    width: 80%;
+}
+
+.overlay-container {
+    width: 50%;
+    left: 50%;
+    top: 0;
+    position: absolute;
+    height: 100%;
+    z-index: 100;
+    overflow: hidden;
+}
+.overlay {
+    position: relative;
+    top: 0;
+    width: 200%;
+    height: 100%;
+    left: -100%;
+    background: linear-gradient(to right, #ff9d01, #ea0c5c);
+}
+.overlay-panel {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    width: 50%;
+    height: 100%;
+}
+.overlay-content {
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: white;
+    text-align: center;
+}
+.overlay-container p {
+    color: white;
+}
+.overlay-left {
+    left: 0;
+}
+.overlay-right {
+    right: 0;
+}
