@@ -8,7 +8,7 @@
 
 
 
-    <div class="card shadow w-50 bg-white position-relative">
+    <div #card class="card shadow w-50 bg-white position-relative">
         <div class="form-container sign-in-container">
             <div class="form">
                 <h3>Sign In</h3>
@@ -30,14 +30,14 @@
                     <div class="overlay-content">
                         <h3>Welcome Back!</h3>
                         <p>To keep connected with us please login with your personal info</p>
-                        <button class="btn btn-secondary">Click me</button>
+                        <button class="btn btn-secondary" (click)="changeToLogIn()">Click me</button>
                     </div>
                 </div>
                 <div class="overlay-panel overlay-right">
                     <div class="overlay-content">
                         <h3>Welcome Back!</h3>
                         <p>To keep connected with us please login with your personal info</p>
-                        <button class="btn btn-secondary">Click me</button>
+                        <button class="btn btn-secondary" (click)="changeToSignUp()">Click me</button>
                     </div>
                 </div>
             </div>

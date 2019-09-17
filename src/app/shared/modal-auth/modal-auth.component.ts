@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input, ElementRef } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, ElementRef, ViewChild, Renderer2 } from '@angular/core';
 import { toggleModal } from 'src/app/animations/animations';
 
 @Component({
@@ -9,10 +9,11 @@ import { toggleModal } from 'src/app/animations/animations';
 })
 export class ModalAuthComponent implements OnInit {
 
-  constructor() { }
+  constructor(private renderer: Renderer2) { }
 
   @Output() toggleModal = new EventEmitter<boolean>();
   @Input() showModal: boolean;
+  @ViewChild('card', {static: false}) card: ElementRef;
 
   ngOnInit() {
   }
@@ -26,6 +27,13 @@ export class ModalAuthComponent implements OnInit {
     } else {
       this.toggleModal.emit(false);
     }
+  }
+
+  changeToSignUp() {
+    this.renderer.addClass(this.card.nativeElement, 'right-panel-active');
+  }
+  changeToLogIn() {
+    this.renderer.removeClass(this.card.nativeElement, 'right-panel-active');
   }
 
 }

@@ -22,6 +22,7 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    transition: .5s ease-in-out;
 }
 .sign-in-container {
     z-index: 2;
@@ -42,6 +43,7 @@
     height: 100%;
     z-index: 100;
     overflow: hidden;
+    transition: .5s ease-in-out;
 }
 .overlay {
     position: relative;
@@ -58,6 +60,7 @@
     top: 0;
     width: 50%;
     height: 100%;
+    transition: .5s ease-in-out;
 }
 .overlay-content {
     width: 80%;
@@ -73,7 +76,52 @@
 }
 .overlay-left {
     left: 0;
+    transform: translateX(-100%);
 }
 .overlay-right {
     right: 0;
+}
+/* ANIMATIONS */
+.right-panel-active .overlay-right {
+    transform: translateX(150%);
+}
+.right-panel-active .overlay-left {
+    transform: translateX(100%);
+}
+.right-panel-active .overlay-container{
+    transform: translateX(-100%);
+}
+.right-panel-active .form-container {
+    transform: translateX(100%);
+}
+
+.right-panel-active .sign-up-container {
+    opacity: 1;
+    z-index: 5;
+	animation: show 0.5s;
+}
+.right-panel-active .sign-in-container {
+    opacity: 0;
+	animation: hide 0.5s;
+}
+
+@keyframes show {
+	0%, 49.99% {
+		opacity: 0;
+		z-index: 1;
+	}
+	
+	50%, 100% {
+		opacity: 1;
+		z-index: 5;
+	}
+}
+@keyframes hide {
+	0%, 49.99% {
+		opacity: 1;
+	}
+	
+	50%, 100% {
+		opacity: 0;
+	}
 }
