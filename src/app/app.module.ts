@@ -33,6 +33,8 @@ import { EditPostComponent } from './pages/blog/edit-post/edit-post.component';
 import { HeaderComponent } from './pages/home/header/header.component';
 import { HomeSectionCategoriesComponent } from './pages/home/home-section-categories/home-section-categories.component';
 import { CardCategoryComponent } from './pages/home/card-category/card-category.component';
+import { LoginFormComponent } from './features/auth/components/login-form/login-form.component';
+import { RegisterFormComponent } from './features/auth/components/register-form/register-form.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +61,8 @@ import { CardCategoryComponent } from './pages/home/card-category/card-category.
     HeaderComponent,
     HomeSectionCategoriesComponent,
     CardCategoryComponent,
+    LoginFormComponent,
+    RegisterFormComponent,
   ],
   imports: [
     BrowserModule,

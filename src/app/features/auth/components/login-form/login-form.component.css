@@ -1,0 +1,27 @@
+/* FORM STYLE */
+input {
+    background: #eee;
+    border: none;
+    transition: .2s ease;
+}
+input:focus {
+    border: none;
+    background: #eee;
+    box-shadow: none;
+    padding-left: 20px;
+}
+.form-btn {
+    border-radius: 5px;
+    border: 1px solid #FF4B2B;
+    background-color: #FF4B2B;
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 12px 45px;
+    letter-spacing: 1px;
+    margin-top: 20px;
+}
+p {
+    margin-bottom: 28px;
+    font-weight: 500;
+}
