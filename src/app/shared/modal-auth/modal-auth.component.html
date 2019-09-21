@@ -1,18 +1,8 @@
 <div class="w-100 h-100 fixed-top d-flex align-items-center justify-content-center" @toggleModal *ngIf="showModal" (click)="onHideModal($event)">
-    <!-- <div class="card w-25 mx-auto position-relative bg-white shadow">
-        <div class="card-body">
-            <app-auth-form></app-auth-form>
-        </div>
-        <button class="btn btn-danger btn-sm position-absolute" (click)="onHideModal()">X</button>
-    </div> -->
-
-
-
+    <app-alert-msg  [class]="'danger'" *ngIf="error" class="alert-container"> {{error}} </app-alert-msg>
     <div #card class="card shadow w-50 bg-white position-relative">
         <div class="form-container sign-in-container">
             <div class="form">
-                <!-- <input type="email" required placeholder="Email" class="form-control">
-                <input type="password" required placeholder="Password" class="form-control"> -->
                 <app-login-form></app-login-form>
             </div>
         </div>
@@ -25,16 +15,16 @@
             <div class="overlay">
                 <div class="overlay-panel overlay-left">
                     <div class="overlay-content">
-                        <h3>Welcome Back!</h3>
-                        <p>To keep connected with us please login with your personal info</p>
-                        <button class="btn btn-secondary" (click)="changeToLogIn()">Click me</button>
+                        <h2>Already registered?</h2>
+                        <p>Please login with your personal info</p>
+                        <button class="overlay-btn" (click)="changeToLogIn()">SIGN IN</button>
                     </div>
                 </div>
                 <div class="overlay-panel overlay-right">
                     <div class="overlay-content">
-                        <h3>Welcome Back!</h3>
-                        <p>To keep connected with us please login with your personal info</p>
-                        <button class="btn btn-secondary" (click)="changeToSignUp()">Click me</button>
+                        <h2>No account yet?</h2>
+                        <p>Enter your personal details and start journey with us</p>
+                        <button class="overlay-btn" (click)="changeToSignUp()">SIGN UP</button>
                     </div>
                 </div>
             </div>

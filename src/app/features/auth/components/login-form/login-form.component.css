@@ -10,6 +10,12 @@ input:focus {
     box-shadow: none;
     padding-left: 20px;
 }
+input.ng-invalid.ng-dirty {
+    color: red;
+}
+input.ng-invalid.ng-dirty::placeholder {
+    color: red;
+}
 .form-btn {
     border-radius: 5px;
     border: 1px solid #FF4B2B;

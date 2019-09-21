@@ -1,17 +1,18 @@
 import { PostModel } from './../../models/post.model';
-import { PostImageElement, PostHeadingElement, PostParagraphElement } from './../../models/post-content-elements.model';
+import { ElementHtmlString, ImageElement } from './../../models/post-content-elements.model';
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormGroup, FormArray, FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app-store/app-store';
 import { FormPostType } from '../../models/post.model';
 import { OnAddPost, OnUpdatePost } from '../../store/posts.actions';
-import { take } from 'rxjs/operators';
+import { slideInOut } from 'src/app/animations/animations';
 
 @Component({
   selector: 'app-post-form',
   templateUrl: './post-form.component.html',
-  styleUrls: ['./post-form.component.css']
+  styleUrls: ['./post-form.component.css'],
+  animations: [slideInOut]
 })
 
 export class PostFormComponent implements OnInit {
@@ -39,7 +40,7 @@ export class PostFormComponent implements OnInit {
       this.formPost.user = authState.user.email;
     });
 
-    this.form.valueChanges.subscribe( () => this.updateOutput() );
+    this.form.valueChanges.subscribe( () => this.updateOutput());
   }
 
   initForm() {
@@ -71,16 +72,14 @@ export class PostFormComponent implements OnInit {
     this.formPost.category = this.form.value.category;
     this.formPost.content = [];
     this.formArrayControls.controls.map( item => {
-      if ( item.value.hasOwnProperty('heading') ) {
-        this.formPost.content.push( new PostHeadingElement(item.value.heading, item.value.size, item.value.align, item.value.color) );
-      }
-      if ( item.value.hasOwnProperty('paragraph') ) {
-        this.formPost.content.push( new PostParagraphElement(item.value.paragraph, item.value.align, item.value.color) );
+      if ( item.value.hasOwnProperty('text') ) {
+        this.formPost.content.push( new ElementHtmlString(item.value.text) );
       }
       if ( item.value.hasOwnProperty('image') ) {
-        this.formPost.content.push( new PostImageElement(item.value.image, item.value.size, item.value.align, item.value.radius) );
+        this.formPost.content.push( new ImageElement(item.value.image, item.value.size, item.value.align, item.value.radius) );
       }
     });
+    console.log(this.formPost);
     this.emitContent.emit(this.formPost);
   }
 
@@ -90,22 +89,10 @@ export class PostFormComponent implements OnInit {
 
   addElement(type: string) {
     switch (type) {
-      case 'Heading':
+      case 'Text':
           this.formArrayControls.push(
             new FormGroup({
-              heading: new FormControl('Heading'),
-              size: new FormControl('h2'),
-              align: new FormControl('center'),
-              color: new FormControl('#000000')
-            })
-          );
-          break;
-      case 'Paragraph':
-          this.formArrayControls.push(
-            new FormGroup({
-              paragraph: new FormControl('Paragraph'),
-              align: new FormControl('left'),
-              color: new FormControl('#000000')
+              text: new FormControl('Text....'),
             })
           );
           break;
@@ -137,22 +124,11 @@ export class PostFormComponent implements OnInit {
   initPostArrayContent() {
     if (this.selectedPost.content.length > 0) {
       this.selectedPost.content.map( item => {
-        if ( item.hasOwnProperty('heading') ) {
+        console.log(item);
+        if ( item.hasOwnProperty('htmlString') ) {
           this.formArrayControls.push(
             new FormGroup({
-              heading: new FormControl(item.heading),
-              size: new FormControl(item.size),
-              align: new FormControl(item.align),
-              color: new FormControl(item.color)
-            })
-          );
-        }
-        if ( item.hasOwnProperty('paragraph') ) {
-          this.formArrayControls.push(
-            new FormGroup({
-              paragraph: new FormControl(item.paragraph),
-              align: new FormControl(item.align),
-              color: new FormControl(item.color)
+              text: new FormControl(item.htmlString),
             })
           );
         }

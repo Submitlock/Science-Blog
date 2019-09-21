@@ -23,62 +23,15 @@
             </div>
             <h3 class="text-center"> <u>Post Content</u> </h3>
             <div formArrayName="formArray">
-                <div *ngFor="let control of formArrayControls.controls; let i = index;" [formGroupName]="i">
+                <div *ngFor="let control of formArrayControls.controls; let i = index;" [formGroupName]="i" @slideInOut>
                     <button class="btn btn-sm btn-primary" (click)="deleteControl(i)" type="button">click</button>
-                    <!-- ADD HEADING -->
-                    <div *ngIf="control.value.hasOwnProperty('heading')">
-                        <div class="form-group">
-                            <label> <b>Heading</b> </label>
-                            <input class="form-control" formControlName="heading">
-                        </div>
-                        <div class="ml-3">
-                                <div class="form-group" style="font-size: 14px;">
-                                    <label class="mr-3"> <b>Size: </b> </label>
-                                    <input type="radio" formControlName="size" value="h1"> H1
-                                    <input type="radio" formControlName="size" value="h2"> H2
-                                    <input type="radio" formControlName="size" value="h3"> H3
-                                    <input type="radio" formControlName="size" value="h4"> H4
-                                    <input type="radio" formControlName="size" value="h5"> H5
-                                </div>
-                            <div class="form-group" style="font-size: 14px;">
-                                <label class="mr-3"> <b>Align: </b> </label>
-                                <input type="radio" formControlName="align" value="left"> Left
-                                <input type="radio" formControlName="align" value="center"> Center
-                                <input type="radio" formControlName="align" value="right"> Right
-                            </div>
-                            <div class="form-group" style="font-size: 14px;">
-                                <div class="row">
-                                    <div class="col-2"> <label><b>Color:</b></label> </div>
-                                    <div class="col-8"> <input type="text" class="form-control w-25" formControlName="color"> </div>
-                                </div>
-                            </div>
-                        </div>
+                    <!-- TEXT -->
+                    <div *ngIf="control.value.hasOwnProperty('text')">
+                        <app-ngx-editor [placeholder]="'Enter text here...'" [spellcheck]="true" formControlName="text"></app-ngx-editor>
                     </div>
-                    <!-- /ADD HEADING -->
-                    <!-- ADD PARAGRAPH -->
-                    <div *ngIf="control.value.hasOwnProperty('paragraph')">
-                        <div class="form-group">
-                            <label> <b>Paragraph</b> </label>
-                            <input class="form-control" formControlName="paragraph">
-                        </div>
-                        <div class="ml-3">
-                            <div class="form-group" style="font-size: 14px;">
-                                <label class="mr-3"> <b>Align: </b> </label>
-                                <input type="radio" formControlName="align" value="left"> Left
-                                <input type="radio" formControlName="align" value="center"> Center
-                                <input type="radio" formControlName="align" value="right"> Right
-                            </div>
-                            <div class="form-group" style="font-size: 14px;">
-                                <div class="row">
-                                    <div class="col-2"> <label><b>Color:</b></label> </div>
-                                    <div class="col-8"> <input type="text" class="form-control w-25" formControlName="color"> </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /ADD PARAGRAPH -->
+                    <!-- ///TEXT -->
                     <!-- ADD IMAGE -->
-                    <div *ngIf="control.value.hasOwnProperty('image')">
+                    <div *ngIf="control.value.hasOwnProperty('image')" @slideInOut>
                         <div class="form-group">
                             <label> <b>Image URL</b> </label>
                             <input class="form-control" formControlName="image">
@@ -104,7 +57,7 @@
                             </div>
                         </div>
                     </div>
-                    <!-- /ADD IMAGE -->
+                    <!-- ///ADD IMAGE -->
                 </div>
             </div>
             <div class="form-goup">

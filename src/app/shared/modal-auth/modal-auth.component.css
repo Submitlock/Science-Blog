@@ -115,3 +115,24 @@
 		z-index: 5;
 	}
 }
+.alert-container {
+    position: absolute;
+    width: 50%;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.overlay-btn {
+    border-radius: 5px;
+    border: 1px solid white;;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 12px 45px;
+    letter-spacing: 1px;
+    margin-top: 20px;
+    background: transparent;
+}
+.overlay-btn:focus {
+    outline: none;
+}

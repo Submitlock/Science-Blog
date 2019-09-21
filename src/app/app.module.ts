@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { EffectsModule } from '@ngrx/effects';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgxEditorModule } from 'ngx-editor';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
@@ -15,7 +16,6 @@ import { BtnSpinnerComponent } from './shared/btn-spinner/btn-spinner.component'
 import { HomeComponent } from './pages/home/home.component';
 import { BlogComponent } from './pages/blog/blog.component';
 import { ModalAuthComponent } from './shared/modal-auth/modal-auth.component';
-import { AuthFormComponent } from './features/auth/components/auth-form/auth-form.component';
 import { StoreModule } from '@ngrx/store';
 import { NewPostComponent } from './pages/blog/new-post/new-post.component';
 import { PostFormComponent } from './features/posts/components/post-form/post-form.component';
@@ -35,6 +35,7 @@ import { HomeSectionCategoriesComponent } from './pages/home/home-section-catego
 import { CardCategoryComponent } from './pages/home/card-category/card-category.component';
 import { LoginFormComponent } from './features/auth/components/login-form/login-form.component';
 import { RegisterFormComponent } from './features/auth/components/register-form/register-form.component';
+import { ConfirmPasswordDirective } from './directives/confirm-password.directive';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,6 @@ import { RegisterFormComponent } from './features/auth/components/register-form/
     HomeComponent,
     BlogComponent,
     ModalAuthComponent,
-    AuthFormComponent,
     NewPostComponent,
     PostFormComponent,
     AddControlBtnComponent,
@@ -63,6 +63,7 @@ import { RegisterFormComponent } from './features/auth/components/register-form/
     CardCategoryComponent,
     LoginFormComponent,
     RegisterFormComponent,
+    ConfirmPasswordDirective,
   ],
   imports: [
     BrowserModule,
@@ -73,6 +74,7 @@ import { RegisterFormComponent } from './features/auth/components/register-form/
     StoreModule.forRoot(appReducer),
     EffectsModule.forRoot([AuthEffects, PostsEffects]),
     HttpClientModule,
+    NgxEditorModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

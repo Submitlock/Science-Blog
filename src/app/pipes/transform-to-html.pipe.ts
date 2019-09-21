@@ -21,29 +21,14 @@ export class TransformToHTMLPipe implements PipeTransform {
     if (formPost.content.length > 0) {
       postContentHTML = '';
       formPost.content.map( item => {
-        if (item.hasOwnProperty('heading')) {
-          postContentHTML +=
-            `
-              <${item.size} style='text-align: ${item.align}; color: ${item.color}'>
-                ${item.heading}
-              </${item.size}>
-            `;
-        }
-        if (item.hasOwnProperty('paragraph')) {
-          postContentHTML +=
-            `
-              <p style='text-align: ${item.align}; color: ${item.color}'>
-                ${item.paragraph}
-              </p>
-            `;
+        if (item.hasOwnProperty('htmlString')) {
+          postContentHTML += item.htmlString;
         }
         if (item.hasOwnProperty('image')) {
           postContentHTML +=
-            `
-              <p style='text-align: ${item.align}'>
-                <img src='${item.image}' style='width: ${item.size}%; border-radius: ${item.radius}%'>
-              </p>
-            `;
+          `<p style="text-align: ${item.align}">
+          <img src="${item.image}" style="width: ${item.size}%; border-radius: ${item.radius}%">
+        </p>`;
         }
       });
     }

@@ -23,12 +23,15 @@ export const toggleModal =
 export const slideInOut =
     trigger('slideInOut', [
         transition(':enter', [
-            style({ transform: 'translatX(-20px)' }),
-            animate('1s ease', style({ transform: 'translateX(0px)' }))
+            style({ transform: 'translateX(-40px)', opacity: 0 }),
+            animate('.5s ease', style({ transform: 'translateX(0px)', opacity: 1 }))
+        ]),
+        transition(':leave', [
+            animate('.5s ease', style({ transform: 'translateX(40px)', opacity: 0 }))
         ]),
     ]);
 
-export const viewCategoryAnimation = 
+export const viewCategoryAnimation =
     trigger('viewCategoryAnimation', [
         state('normal', style({left: 0, width: '100%'})),
         state('hovered', style({right: 0, width: 0})),
@@ -37,4 +40,4 @@ export const viewCategoryAnimation =
             style({left: 0}),
             animate('.4s ease')
         ])
-    ])
+    ]);

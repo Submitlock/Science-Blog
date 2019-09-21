@@ -1,8 +1,0 @@
-.w-50 {
-    cursor: pointer;
-    transition: .2s ease;
-    border-radius: 2px;
-}
-.w-50:hover {
-    width: 100%!important;
-}

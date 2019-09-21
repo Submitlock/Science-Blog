@@ -65,7 +65,37 @@ export class AuthEffects {
                 localStorage.setItem('user', JSON.stringify(user));
                 return new fromAuthActions.SuccessAuth(user);
             }),
-            catchError(err => of( new fromAuthActions.AuthError('Something Went Wrong') ))
+            catchError(err => {
+                const errorType = err.error.error.message;
+                let errTextUI: string;
+                switch (errorType) {
+                    case 'EMAIL_EXISTS':
+                        errTextUI = 'Email already exists';
+                        break;
+                    case 'OPERATION_NOT_ALLOWED':
+                            errTextUI = 'Password sign-in is disabled';
+                            break;
+                    case 'TOO_MANY_ATTEMPTS_TRY_LATER':
+                            errTextUI = 'Too many atempts, try later';
+                            break;
+                    case 'EMAIL_NOT_FOUND':
+                            errTextUI = 'Email was not found';
+                            break;
+                    case 'INVALID_EMAIL':
+                            errTextUI = 'Email is not in valid format';
+                            break;
+                    case 'INVALID_PASSWORD':
+                            errTextUI = 'Password is not valid';
+                            break;
+                    case 'USER_DISABLED':
+                            errTextUI = 'User is disabled';
+                            break;
+                    default:
+                        errTextUI = 'Something went Wrong';
+                        break;
+                }
+                return of( new fromAuthActions.AuthError(errTextUI) );
+            })
         );
     }
 }
