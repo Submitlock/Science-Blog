@@ -6,13 +6,13 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app-store/app-store';
 import { FormPostType } from '../../models/post.model';
 import { OnAddPost, OnUpdatePost } from '../../store/posts.actions';
-import { slideInOut } from 'src/app/animations/animations';
+import { slideInOut, toggleHeight } from 'src/app/animations/animations';
 
 @Component({
   selector: 'app-post-form',
   templateUrl: './post-form.component.html',
   styleUrls: ['./post-form.component.css'],
-  animations: [slideInOut]
+  animations: [slideInOut, toggleHeight]
 })
 
 export class PostFormComponent implements OnInit {
@@ -25,6 +25,9 @@ export class PostFormComponent implements OnInit {
   selectedPost: PostModel;
   form: FormGroup;
   formPost = new FormPostType();
+
+  openMeta = false;
+  openContent = false;
 
 
   ngOnInit() {
@@ -47,7 +50,7 @@ export class PostFormComponent implements OnInit {
     this.form = new FormGroup({
       title: new FormControl('Title'),
       image: new FormControl('https://good.co/wp-content/uploads/2017/03/science_bg.jpg'),
-      category: new FormControl('cat3'),
+      category: new FormControl('Chemistry'),
       formArray: new FormArray([])
     });
     if (!this.postID) {

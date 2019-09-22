@@ -1,0 +1,29 @@
+.edit-panel {
+    position: fixed;
+    width: 20%;
+    height: 100vh;
+    overflow-y: scroll;
+    padding: 0px 15px;
+    left: 0;
+    top: 0;
+    z-index: 5;
+    background: #e6e9ec;
+    margin-top: 48px;
+    padding-top: 20px;
+}
+.view-panel {
+    width: 80%;
+    padding: 20px 50px;
+    position: relative;
+    left: 20%;
+}
+h4 {
+    position: fixed;
+    width: 20%;
+    background: linear-gradient(to right, #ff9d01, #ea0c5c);
+    color: white;
+    left: 0;
+    top: 0;
+    padding: 10px 0px;
+    z-index: 6;
+}

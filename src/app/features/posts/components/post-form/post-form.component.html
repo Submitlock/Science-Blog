@@ -1,27 +1,43 @@
-<h2 class="text-center">Create new Post</h2>
-<div class="card">
-    <div class="card-body">
-        <form (ngSubmit)="onSubmit()" [formGroup]="form" #f="ngForm">
-            <h3 class="text-center"> <u>Post Meta</u> </h3>
+<form (ngSubmit)="onSubmit()" [formGroup]="form" #f="ngForm">
+    <!-- POST META -->
+    <div class="post-meta">
+        <h4 class="d-flex justify-content-between" (click)="openMeta = !openMeta">
+            Post Meta 
+            <i class="fa fa-chevron-down" [ngClass]="{'active-i': openMeta}"></i>
+        </h4>
+        <div class="panel-container" @toggleHeight *ngIf="openMeta">
             <div class="form-group">
                 <label> <b>Title:</b> </label>
                 <input type="text" class="form-control" formControlName="title">
             </div>
             <div class="form-group">
-                <label> <b>Post image:</b> </label>
+                <label> <b>Post image URL:</b> </label>
                 <input type="text" class="form-control" formControlName="image">
             </div>
             <div class="form-group">
                 <div class="form-group">
                     <label class="mr-3"> <b>Category: </b> </label>
-                    <input type="radio" formControlName="category" value="cat1"> cat1
-                    <input type="radio" formControlName="category" value="cat2"> cat2
-                    <input type="radio" formControlName="category" value="cat3"> cat3
-                    <input type="radio" formControlName="category" value="cat4"> cat4
-                    <input type="radio" formControlName="category" value="cat5"> cat5
+                    <div class="cats">
+                        <label><input type="radio" formControlName="category" value="Chemistry"> Chemistry </label>
+                        <label><input type="radio" formControlName="category" value="Technologies"> Technologies </label>
+                        <label><input type="radio" formControlName="category" value="Physics"> Physics </label>
+                        <label><input type="radio" formControlName="category" value="The Brain"> The Brain </label>
+                        <label><input type="radio" formControlName="category" value="The Space"> The Space </label>
+                        <label><input type="radio" formControlName="category" value="Environment"> Environment </label>
+                    </div>
                 </div>
             </div>
-            <h3 class="text-center"> <u>Post Content</u> </h3>
+        </div>
+    </div>
+    <!-- /POST META -->
+    <div class="dividing"></div>
+    <!-- POST CONTENT -->
+    <div class="post-content">
+        <h4 class="d-flex justify-content-between" (click)="openContent = !openContent">
+            Post Content
+            <i class="fa fa-chevron-down" [ngClass]="{'active-i': openContent}"></i>
+        </h4>
+        <div class="panel-container" *ngIf="openContent" @toggleHeight>
             <div formArrayName="formArray">
                 <div *ngFor="let control of formArrayControls.controls; let i = index;" [formGroupName]="i" @slideInOut>
                     <button class="btn btn-sm btn-primary" (click)="deleteControl(i)" type="button">click</button>
@@ -60,13 +76,14 @@
                     <!-- ///ADD IMAGE -->
                 </div>
             </div>
-            <div class="form-goup">
-                <button class="btn btn-primary" type="submit">Submit</button>
-            </div>
-        </form>
-        <app-add-control-btn (addElement)="addElement($event)" appHideDropDown></app-add-control-btn>
+            <app-add-control-btn (addElement)="addElement($event)" appHideDropDown></app-add-control-btn>
+        </div>
     </div>
-</div>
+    <!-- /POST CONTENT -->
+    <div class="form-goup">
+        <button class="btn btn-primary" type="submit">Submit</button>
+    </div>
+</form>
 
 
 

@@ -31,6 +31,17 @@ export const slideInOut =
         ]),
     ]);
 
+export const toggleHeight =
+    trigger('toggleHeight', [
+        transition(':enter', [
+            style({ height: '0', padding: '0' }),
+            animate('.2s ease', style({ height: 'auto', padding: '10px' }))
+        ]),
+        transition(':leave', [
+            animate('.2s ease', style({ height: '0', padding: '0' }))
+        ]),
+    ]);
+
 export const viewCategoryAnimation =
     trigger('viewCategoryAnimation', [
         state('normal', style({left: 0, width: '100%'})),
