@@ -34,11 +34,11 @@ export const slideInOut =
 export const toggleHeight =
     trigger('toggleHeight', [
         transition(':enter', [
-            style({ height: '0', padding: '0' }),
-            animate('.2s ease', style({ height: 'auto', padding: '10px' }))
+            style({ height: '0', padding: '0', overflow: 'hidden' }),
+            animate('.2s ease', style({ height: 'auto', padding: '10px', overflow: 'visible' }))
         ]),
         transition(':leave', [
-            animate('.2s ease', style({ height: '0', padding: '0' }))
+            animate('.2s ease', style({ height: '0', padding: '0', overflow: 'hidden' }))
         ]),
     ]);
 

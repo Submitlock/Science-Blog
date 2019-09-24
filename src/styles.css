@@ -29,3 +29,12 @@ p {
     font-size: 15px;
     line-height: 1.8;
 }
+
+/* BUTTONS */
+button[title="Insert Image"],
+button[title="Insert Video"] {
+    display: none!important;
+}
+.ngx-toolbar-set {
+    flex-wrap: wrap!important;
+}

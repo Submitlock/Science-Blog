@@ -37,7 +37,8 @@
     <div class="form-group text-center">
         <button 
             type="submit"
-            class="form-btn">
+            class="form-btn"
+            [disabled]="!form.valid">
                 SIGN UP 
                 <app-btn-spinner *ngIf="loading"></app-btn-spinner>
         </button>

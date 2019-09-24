@@ -37,51 +37,69 @@
             Post Content
             <i class="fa fa-chevron-down" [ngClass]="{'active-i': openContent}"></i>
         </h4>
-        <div class="panel-container" *ngIf="openContent" @toggleHeight>
-            <div formArrayName="formArray">
-                <div *ngFor="let control of formArrayControls.controls; let i = index;" [formGroupName]="i" @slideInOut>
-                    <button class="btn btn-sm btn-primary" (click)="deleteControl(i)" type="button">click</button>
-                    <!-- TEXT -->
-                    <div *ngIf="control.value.hasOwnProperty('text')">
-                        <app-ngx-editor [placeholder]="'Enter text here...'" [spellcheck]="true" formControlName="text"></app-ngx-editor>
-                    </div>
-                    <!-- ///TEXT -->
-                    <!-- ADD IMAGE -->
-                    <div *ngIf="control.value.hasOwnProperty('image')" @slideInOut>
-                        <div class="form-group">
-                            <label> <b>Image URL</b> </label>
-                            <input class="form-control" formControlName="image">
-                        </div>
-                        <div class="ml-3">
-                            <div class="form-group" style="font-size: 14px;">
-                                <div class="row">
-                                    <div class="col-2"> <label><b>Size in %:</b></label> </div>
-                                    <div class="col-8"> <input type="number" class="form-control w-25" formControlName="size"> </div>
+        <div 
+            class="panel-container"
+            *ngIf="openContent"
+            @toggleHeight
+            [ngStyle]="{'padding': formArrayControls.controls.length === 0 ? '0px' : '10px' }">
+                <div formArrayName="formArray">
+                    <div 
+                        *ngFor="let control of formArrayControls.controls; let i = index;"
+                        [formGroupName]="i"
+                        @slideInOut
+                        class="position-relative">
+                            <button 
+                                class="btn btn-sm btn-danger btn-sm delete-element-btn"
+                                (click)="deleteControl(i)"
+                                type="button">
+                                    <i class="fa fa-times"></i>
+                            </button>
+                            <!-- TEXT -->
+                            <div *ngIf="control.value.hasOwnProperty('text')">
+                                <h5 class="text-center"> <u>TEXT:</u> </h5>
+                                <app-ngx-editor 
+                                    [placeholder]="'Enter text here...'"
+                                    [spellcheck]="true"
+                                    formControlName="text">
+                                </app-ngx-editor>
+                            </div>
+                            <!-- ///TEXT -->
+                            <!-- ADD IMAGE -->
+                            <div *ngIf="control.value.hasOwnProperty('image')" @slideInOut>
+                                <h5 class="text-center"> <u>IMAGE:</u> </h5>
+                                <div class="form-group">
+                                    <label> <b>Url:</b> </label>
+                                    <input class="form-control" formControlName="image">
+                                </div>
+                                <div class="form-group" style="font-size: 14px;">
+                                    <label><b>Size in %:</b></label>
+                                    <input type="number" class="form-control" formControlName="size" min="0">
+                                </div>
+                                <div class="form-group" style="font-size: 14px;">
+                                    <label class="mr-3"> <b>Align: </b> </label>
+                                        <div class="img-align">
+                                            <label> <input type="radio" formControlName="align" value="left"> Left </label>
+                                            <label> <input type="radio" formControlName="align" value="center"> Center </label>
+                                            <label> <input type="radio" formControlName="align" value="right"> Right </label>
+                                        </div>
+                                </div>
+                                <div class="form-group" style="font-size: 14px;">
+                                    <label><b>Border radius in %:</b></label>
+                                    <input type="number" class="form-control" formControlName="radius" min="0">
                                 </div>
                             </div>
-                            <div class="form-group" style="font-size: 14px;">
-                                <label class="mr-3"> <b>Align: </b> </label>
-                                <input type="radio" formControlName="align" value="left"> Left
-                                <input type="radio" formControlName="align" value="center"> Center
-                                <input type="radio" formControlName="align" value="right"> Right
-                            </div>
-                            <div class="form-group" style="font-size: 14px;">
-                                <div class="row">
-                                    <div class="col-2"> <label><b>Border radius in %:</b></label> </div>
-                                    <div class="col-8"> <input type="number" class="form-control w-25" formControlName="radius"> </div>
-                                </div>
-                            </div>
-                        </div>
+                            <!-- ///ADD IMAGE -->
+                            <hr>
                     </div>
-                    <!-- ///ADD IMAGE -->
                 </div>
-            </div>
-            <app-add-control-btn (addElement)="addElement($event)" appHideDropDown></app-add-control-btn>
         </div>
     </div>
+    <div class="my-2" *ngIf="openContent" @slideInOut>
+        <app-add-control-btn (addElement)="addElement($event)" appHideDropDown></app-add-control-btn>
+    </div>
     <!-- /POST CONTENT -->
-    <div class="form-goup">
-        <button class="btn btn-primary" type="submit">Submit</button>
+    <div class="form-goup submit-container">
+        <button class="btn btn-success btn-block" type="submit">Submit</button>
     </div>
 </form>
 

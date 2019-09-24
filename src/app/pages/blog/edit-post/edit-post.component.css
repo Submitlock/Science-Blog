@@ -1,25 +1,33 @@
 .edit-panel {
     position: fixed;
-    width: 20%;
+    width: 250px;
     height: 100vh;
     overflow-y: scroll;
-    padding: 0px 15px;
+    overflow-x: hidden;
+    padding: 0px 10px;
     left: 0;
     top: 0;
     z-index: 5;
     background: #e6e9ec;
-    margin-top: 48px;
-    padding-top: 20px;
+    padding-top: 68px;
 }
+.edit-panel::-webkit-scrollbar {
+    background: #e6e9ec;
+    width: 4px;
+}
+.edit-panel::-webkit-scrollbar-thumb {
+    background: #999;
+    border-radius: 4px;
+} 
 .view-panel {
-    width: 80%;
+    width: auto;
     padding: 20px 50px;
     position: relative;
-    left: 20%;
+    padding-left: 270px;
 }
 h4 {
     position: fixed;
-    width: 20%;
+    width: 250px;
     background: linear-gradient(to right, #ff9d01, #ea0c5c);
     color: white;
     left: 0;
