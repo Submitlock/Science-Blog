@@ -18,7 +18,7 @@ export class TransformToHTMLPipe implements PipeTransform {
         <p class='text-muted'>Category: ${formPost.category}</p>
         <p class='text-muted'>Made by: ${formPost.user}</p>
       `;
-    if (formPost.content.length > 0) {
+    if (formPost.content && formPost.content.length > 0) {
       postContentHTML = '';
       formPost.content.map( item => {
         if (item.hasOwnProperty('htmlString')) {

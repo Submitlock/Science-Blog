@@ -1,0 +1,37 @@
+.edit-panel {
+    position: fixed;
+    width: 380px;
+    height: 100vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding: 0px 10px;
+    left: 0;
+    top: 0;
+    z-index: 5;
+    background: #e6e9ec;
+    padding-top: 68px;
+}
+.edit-panel::-webkit-scrollbar {
+    background: #e6e9ec;
+    width: 4px;
+}
+.edit-panel::-webkit-scrollbar-thumb {
+    background: #999;
+    border-radius: 4px;
+} 
+.view-panel {
+    width: auto;
+    padding: 20px 50px;
+    position: relative;
+    padding-left: 400px;
+}
+h4 {
+    position: fixed;
+    width: 380px;
+    background: linear-gradient(to right, #ff9d01, #ea0c5c);
+    color: white;
+    left: 0;
+    top: 0;
+    padding: 10px 0px;
+    z-index: 6;
+}

@@ -1,11 +1,11 @@
-<div class="container my-5">
-    <div class="row">
-        <div class="col">
-            <app-post-form (emitContent)="onContentEmit($event)"></app-post-form>
-        </div>
-        <div class="col">
-            <h2 class="text-center">Your post preview</h2>
-            <app-view-post [post]="passPostContent" [showOptions]="false"></app-view-post>
-        </div>
+<app-spinner *ngIf="loading"></app-spinner>
+
+<div class="page-container" *ngIf="!loading">
+    <h4 class="text-center">Edit Panel</h4>
+    <div class="edit-panel">
+        <app-post-form (emitContent)="onContentEmit($event)" [postID]="postID"></app-post-form>
+    </div>
+    <div class="view-panel">
+        <app-view-post [post]="passPostContent" [showOptions]="false"></app-view-post>
     </div>
 </div>

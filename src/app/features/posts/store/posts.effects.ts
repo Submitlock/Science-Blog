@@ -22,13 +22,14 @@ export class PostsEffects {
                     map( res => {
                         const newPost = new PostModel(
                             action.payload.user,
-                            action.payload.date,
+                            action.payload.created,
                             action.payload.title,
                             action.payload.image,
                             action.payload.category,
                             action.payload.content,
                             res.name
                         );
+                        this.router.navigate(['/blog', res.name ]);
                         return new postsActions.AddPost(newPost);
                     }),
                     catchError(err => {
@@ -47,18 +48,20 @@ export class PostsEffects {
             .pipe(
                 map( res => {
                     const posts: PostModel[] = [];
-                    Object.keys(res).map( key => {
-                        const post = new PostModel(
-                            res[key].user,
-                            new Date(res[key].created),
-                            res[key].title,
-                            res[key].image,
-                            res[key].category,
-                            res[key].content,
-                            key
-                        );
-                        posts.push(post);
-                    });
+                    if (res) {
+                        Object.keys(res).map( key => {
+                            const post = new PostModel(
+                                res[key].user,
+                                new Date(res[key].created),
+                                res[key].title,
+                                res[key].image,
+                                res[key].category,
+                                res[key].content,
+                                key
+                            );
+                            posts.push(post);
+                        });
+                    }
                     return new postsActions.FetchPosts(posts);
                 }),
                 catchError(err => {
@@ -93,7 +96,7 @@ export class PostsEffects {
         exhaustMap( (action: postsActions.OnUpdatePost) => {
             const updatedPost = new PostModel(
                 action.payload.user,
-                action.payload.date,
+                action.payload.created,
                 action.payload.title,
                 action.payload.image,
                 action.payload.category,

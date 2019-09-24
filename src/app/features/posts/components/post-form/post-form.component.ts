@@ -35,7 +35,7 @@ export class PostFormComponent implements OnInit {
     this.store.select('postsState').subscribe( res => {
       if (!this.selectedPost && res.posts.length > 0) {
         this.selectedPost = res.posts.filter( v => v.id === this.postID)[0];
-        this.patchForm();
+        if (this.selectedPost) { this.patchForm(); }
       }
     });
 
@@ -60,11 +60,11 @@ export class PostFormComponent implements OnInit {
 
   onSubmit() {
     if (this.postID) {
-      this.formPost.date = this.selectedPost.created;
+      this.formPost.created = this.selectedPost.created;
       this.formPost.id = this.selectedPost.id;
       this.store.dispatch( new OnUpdatePost(this.formPost) );
     } else {
-      this.formPost.date = new Date();
+      this.formPost.created = new Date();
       this.store.dispatch( new OnAddPost(this.formPost) );
     }
   }
@@ -82,7 +82,6 @@ export class PostFormComponent implements OnInit {
         this.formPost.content.push( new ImageElement(item.value.image, item.value.size, item.value.align, item.value.radius) );
       }
     });
-    console.log(this.formPost);
     this.emitContent.emit(this.formPost);
   }
 
@@ -125,9 +124,8 @@ export class PostFormComponent implements OnInit {
   }
 
   initPostArrayContent() {
-    if (this.selectedPost.content.length > 0) {
+    if (this.selectedPost.content && this.selectedPost.content.length > 0) {
       this.selectedPost.content.map( item => {
-        console.log(item);
         if ( item.hasOwnProperty('htmlString') ) {
           this.formArrayControls.push(
             new FormGroup({

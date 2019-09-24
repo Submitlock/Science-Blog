@@ -1,7 +1,6 @@
-
-<div class="container my-5">
+<app-spinner *ngIf="loading"></app-spinner>
+<div class="container my-5" *ngIf="!loading">
     <app-posts-loop [posts]="posts | postsLoopByCategory"></app-posts-loop>
-
     <br>
     <br>
     <button class="btn btn-primary" [routerLink]="['new']">Create a new Post!</button>

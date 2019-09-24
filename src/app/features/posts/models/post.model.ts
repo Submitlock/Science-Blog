@@ -13,7 +13,7 @@ export class PostModel {
 export class FormPostType {
     constructor(
       public user?: string,
-      public date?: Date,
+      public created?: Date,
       public title?: string,
       public image?: string,
       public category?: string,

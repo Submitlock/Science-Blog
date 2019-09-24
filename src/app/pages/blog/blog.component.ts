@@ -13,9 +13,13 @@ export class BlogComponent implements OnInit {
   constructor(private store: Store<AppState>) { }
 
   posts: PostModel[] = [];
+  loading = false;
 
   ngOnInit() {
-    this.store.select('postsState').subscribe( res => this.posts = res.posts);
+    this.store.select('postsState').subscribe( res => {
+      this.posts = res.posts;
+      this.loading = res.loading;
+    });
   }
 
 }
