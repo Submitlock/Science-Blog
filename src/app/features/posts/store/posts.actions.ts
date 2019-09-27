@@ -1,3 +1,4 @@
+import { UserModel } from './../../auth/models/user.model';
 import { Action } from '@ngrx/store';
 import { FormPostType, PostModel } from '../models/post.model';
 
@@ -36,7 +37,7 @@ export class DeletePost implements Action {
 
 export class OnDeletePost implements Action {
     readonly type = ON_DELETE_POST;
-    constructor(public payload: string) {}
+    constructor(public payload: {user: UserModel, postID: string}) {}
 }
 
 export class OnUpdatePost implements Action {

@@ -1,14 +1,17 @@
-<div class="row justify-content-center">
-    <div class="col-4" *ngFor="let post of posts">
-        <div class="card shadow" (click)="selectPost(post.id)">
-            <img [src]="post.image" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title"> {{post.title}} </h5>
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+<div class="row justify-content-center">  
+    <div 
+        class="post-loop-item shadow"
+        *ngFor="let post of posts"
+        [ngStyle]="{'background': 'url('+ post.image +')'}"
+        (click)="selectPost(post.id)">
+            <span class="post-item-category" [ngStyle]="{'background': post.category | catToColor}">{{post.category}}</span>
+            <div class="post-item-meta">
+                <h3> {{ post.title }} </h3>
+                <div class="post-footer d-flex justify-content-between">
+                    <span>{{post.user}}</span> 
+                    <span>{{post.created | date:'mediumDate' }}</span>
+                </div>
             </div>
-            <div class="card-footer">
-                <small class="text-muted">Created by: {{post.user}} on {{post.created | date:'mediumDate' }}</small>
-            </div>
-        </div>
     </div>
+    <h4 class="text-center" *ngIf="posts.length === 0">No Posts to show...</h4>
 </div>

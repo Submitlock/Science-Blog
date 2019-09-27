@@ -1,0 +1,39 @@
+.nav-tabs a {
+    color: #495057;
+}
+a {
+    cursor: pointer;
+}
+.tab-link.active {
+    font-weight: bold;
+}
+
+.bg-shape {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    width: 40%;
+    transform: translateY(-50%);
+}
+.w-100 {
+    margin-top: 150px;
+    margin-bottom: 150px;
+}
+.shape-1 {
+    position: absolute;
+    left: 8%;
+    top: 15%;
+    animation: move-up-down 10s linear infinite;
+}
+.shape-2 {
+    position: absolute;
+    left: 40%;
+    top: -80px;
+    animation: rotate 10s linear infinite;
+}
+.shape-3 {
+    position: absolute;
+    left: 30%;
+    bottom: 0;
+    transform: rotate(45deg); 
+}

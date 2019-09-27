@@ -41,9 +41,9 @@ export class AppComponent implements OnInit {
       console.log('Fetch Triggered');
     }
     // Testing purpose
-    this.store.select('postsState').subscribe( res => {
-      this.posts = res.posts;
-    });
+    // this.store.select('postsState').subscribe( res => {
+    //   this.posts = res.posts;
+    // });
   }
 
   onShowModal(event: boolean) {

@@ -11,7 +11,7 @@ const appRoutes: Routes = [
     { path: '', component: HomeComponent },
     { path: 'blog', component: BlogComponent},
     {path: 'blog/new', component: NewPostComponent, canActivate: [LoggedInProtectionService]},
-    { path: 'blog/:id/edit', component: EditPostComponent },
+    { path: 'blog/:id/edit', component: EditPostComponent, canActivate: [LoggedInProtectionService] },
     { path: 'blog/:id', component: SinglePostComponent},
 ];
 

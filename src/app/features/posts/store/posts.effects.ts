@@ -1,23 +1,26 @@
+import { AppState } from './../../../app-store/app-store';
+import { Store } from '@ngrx/store';
 import { PostModel } from './../models/post.model';
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import * as postsActions from './posts.actions';
 import { exhaustMap, map, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { Router } from '@angular/router';
 
+
 const fireBaseURL = 'https://science-blog-db452.firebaseio.com/';
 
 @Injectable()
 export class PostsEffects {
-  constructor(private actions$: Actions, private http: HttpClient, private router: Router) {}
+  constructor(private actions$: Actions, private http: HttpClient, private router: Router, private store: Store<AppState>) {}
 
   @Effect()
   onAddPost = this.actions$.pipe(
       ofType(postsActions.ON_ADD_POST),
       exhaustMap( (action: postsActions.OnAddPost) => {
-          return this.http.post<{name: string}>(fireBaseURL + 'posts.json', action.payload)
+          return this.http.post<{name: string}>(fireBaseURL + 'posts/' + action.payload.uid + '.json', action.payload)
                 .pipe(
                     map( res => {
                         const newPost = new PostModel(
@@ -44,24 +47,24 @@ export class PostsEffects {
   onFetchPosts = this.actions$.pipe(
       ofType(postsActions.ON_FETCH_POSTS),
       exhaustMap( (action: postsActions.OnFetchPosts) => {
-          return this.http.get(fireBaseURL + 'posts.json')
+        return this.http.get(fireBaseURL + 'posts.json')
             .pipe(
                 map( res => {
                     const posts: PostModel[] = [];
-                    if (res) {
-                        Object.keys(res).map( key => {
+                    Object.keys(res).map( userID => {
+                        Object.keys(res[userID]).map( postID => {
                             const post = new PostModel(
-                                res[key].user,
-                                new Date(res[key].created),
-                                res[key].title,
-                                res[key].image,
-                                res[key].category,
-                                res[key].content,
-                                key
+                                res[userID][postID].user,
+                                new Date(res[userID][postID].created),
+                                res[userID][postID].title,
+                                res[userID][postID].image,
+                                res[userID][postID].category,
+                                res[userID][postID].content,
+                                postID
                             );
                             posts.push(post);
                         });
-                    }
+                    });
                     return new postsActions.FetchPosts(posts);
                 }),
                 catchError(err => {
@@ -76,11 +79,11 @@ export class PostsEffects {
     onDelete = this.actions$.pipe(
         ofType(postsActions.ON_DELETE_POST),
         exhaustMap( (action: postsActions.OnDeletePost) => {
-            return this.http.delete(`${fireBaseURL}posts/${action.payload}.json`)
+            return this.http.delete(`${fireBaseURL}posts/${action.payload.user.userId}/${action.payload.postID}.json`)
             .pipe(
                 map( () => {
                     this.router.navigate(['/blog']);
-                    return new postsActions.DeletePost(action.payload);
+                    return new postsActions.DeletePost(action.payload.postID);
                 }),
                 catchError(err => {
                     console.log(err);

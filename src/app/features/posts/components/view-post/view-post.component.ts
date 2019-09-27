@@ -1,3 +1,4 @@
+import { UserModel } from './../../../auth/models/user.model';
 import { Component, OnInit, Input } from '@angular/core';
 import { FormPostType, PostModel } from '../../models/post.model';
 import { Store } from '@ngrx/store';
@@ -17,16 +18,26 @@ export class ViewPostComponent implements OnInit {
   @Input() post: FormPostType | PostModel;
   @Input() showOptions: boolean;
 
+  loading = false;
+  userMatchPostUser = false;
+  postID = this.route.snapshot.params.id;
+  loggedUser: UserModel;
+
   ngOnInit() {
-    if (!this.post) {
-      this.store.select('postsState').subscribe( res => {
-        this.post = res.posts.filter( v => v.id === this.route.snapshot.params.id)[0];
-      });
-    }
+    this.store.subscribe(res => {
+      if (!this.post) {
+        this.post = res.postsState.posts.filter( v => v.id === this.postID)[0];
+      }
+      if (res.authState.user) {
+        this.loggedUser = res.authState.user;
+        this.userMatchPostUser = this.post.user === res.authState.user.email ? true : false;
+      }
+      this.loading = res.postsState.loading;
+    });
   }
 
   deletePost() {
-    this.store.dispatch( new OnDeletePost(this.route.snapshot.params.id) );
+    this.store.dispatch( new OnDeletePost({user: this.loggedUser, postID: this.postID}) );
   }
   editPost() {
     this.router.navigate(['edit'], {relativeTo: this.route});

@@ -13,6 +13,7 @@ export class CardCategoryComponent implements OnInit {
 
   @Input() color: string;
   @Input() img: string;
+  @Input() category: string;
   linkColor: string;
   linkAnimationState = 'normal';
 

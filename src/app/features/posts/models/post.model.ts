@@ -19,5 +19,6 @@ export class FormPostType {
       public category?: string,
       public content?: any[],
       public id?: string,
+      public uid?: string,
     ) {}
   }

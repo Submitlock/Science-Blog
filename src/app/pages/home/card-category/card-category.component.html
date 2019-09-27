@@ -5,7 +5,9 @@
         </div>
         <ng-content></ng-content>
         <a 
-            href="" 
+            href="#"
+            [routerLink]="['blog']"
+            [queryParams]="{ 'category': category }" 
             [ngStyle]="{color: linkColor}"
             (mouseenter)="onMouseEnter()"
             (mouseleave)="onMouseLeave()">

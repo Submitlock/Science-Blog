@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRouting } from './routing/app-routing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { EffectsModule } from '@ngrx/effects';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxEditorModule } from 'ngx-editor';
@@ -36,6 +36,8 @@ import { CardCategoryComponent } from './pages/home/card-category/card-category.
 import { LoginFormComponent } from './features/auth/components/login-form/login-form.component';
 import { RegisterFormComponent } from './features/auth/components/register-form/register-form.component';
 import { ConfirmPasswordDirective } from './directives/confirm-password.directive';
+import { CatToColorPipe } from './pipes/cat-to-color.pipe';
+import { InterceptorService } from './features/posts/store/interceptor.service';
 
 @NgModule({
   declarations: [
@@ -64,6 +66,7 @@ import { ConfirmPasswordDirective } from './directives/confirm-password.directiv
     LoginFormComponent,
     RegisterFormComponent,
     ConfirmPasswordDirective,
+    CatToColorPipe,
   ],
   imports: [
     BrowserModule,
@@ -76,7 +79,7 @@ import { ConfirmPasswordDirective } from './directives/confirm-password.directiv
     HttpClientModule,
     NgxEditorModule,
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

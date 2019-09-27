@@ -1,7 +1,92 @@
 <app-spinner *ngIf="loading"></app-spinner>
-<div class="container my-5" *ngIf="!loading">
-    <app-posts-loop [posts]="posts | postsLoopByCategory"></app-posts-loop>
-    <br>
-    <br>
-    <button class="btn btn-primary" [routerLink]="['new']">Create a new Post!</button>
+
+<div class="w-100 position-relative">
+    <img src="assets/images/bg-shape2.png" alt="" class="bg-shape">
+    <img src="assets/images/header-float-3.png" alt="header-float-3" class="shape-1">
+    <img src="assets/images/header-float-2.png" alt="header-float-2" class="shape-2">
+    <img src="assets/images/header-float-1.png" alt="header-float-1" class="shape-3">
+    <div class="container">
+        <div class="row d-flex align-items-center">
+            <div class="col-6">
+                <h2><b>Browse our Categories</b></h2>
+                <p class="my-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis.</p>
+            </div>
+            <div class="col-6">
+                <img src="assets/images/blog-categories.png" alt="" width="100%">
+            </div>
+        </div>
+    </div>
+</div>
+<!-- CATEGORY TABS -->
+<div class="container my-5">
+        <ul class="nav nav-tabs justify-content-center mb-4">
+            <li class="nav-item">
+                <a 
+                    class="nav-link tab-link active"
+                    (click)="switchCategory(null)"
+                    [ngClass]="{'active': !selectedCategory}">
+                        All
+                </a>
+            </li>
+            <li class="nav-item">
+                <a 
+                    class="nav-link tab-link"
+                    (click)="switchCategory('Chemistry')"
+                    [ngStyle]="{'color': selectedCategory === 'Chemistry' ? '#fe5e23' : 'black'}"
+                    [ngClass]="{'active': selectedCategory === 'Chemistry'}">
+                        Chemistry
+                </a>
+            </li>
+            <li class="nav-item">
+                <a 
+                    class="nav-link tab-link"
+                    (click)="switchCategory('Technologies')"
+                    [ngStyle]="{'color': selectedCategory === 'Technologies' ? '#009ffb' : 'black'}"
+                    [ngClass]="{'active': selectedCategory === 'Technologies'}">
+                        Technologies
+                </a>
+            </li>
+            <li class="nav-item">
+                <a 
+                    class="nav-link tab-link"
+                    (click)="switchCategory('Physics')"
+                    [ngStyle]="{'color': selectedCategory === 'Physics' ? '#f59f00' : 'black'}"
+                    [ngClass]="{'active': selectedCategory === 'Physics'}">
+                        Physics
+                </a>
+            </li>
+            <li class="nav-item">
+                <a 
+                    class="nav-link tab-link"
+                    (click)="switchCategory('The Brain')"
+                    [ngStyle]="{'color': selectedCategory === 'The Brain' ? '#b57b16' : 'black'}"
+                    [ngClass]="{'active': selectedCategory === 'The Brain'}">
+                        The Brain
+                </a>
+            </li>
+            <li class="nav-item">
+                <a 
+                    class="nav-link tab-link"
+                    (click)="switchCategory('The Space')"
+                    [ngStyle]="{'color': selectedCategory === 'The Space' ? '#8950a8' : 'black'}"
+                    [ngClass]="{'active': selectedCategory === 'The Space'}">
+                        The Space
+                </a>
+            </li>
+            <li class="nav-item">
+                <a 
+                    class="nav-link tab-link"
+                    (click)="switchCategory('Environment')"
+                    [ngStyle]="{'color': selectedCategory === 'Environment' ? '#43c785' : 'black'}"
+                    [ngClass]="{'active': selectedCategory === 'Environment'}">
+                        Environment
+                </a>
+            </li>
+        </ul>
+    <div *ngIf="!loading">
+        <app-posts-loop [posts]="posts | postsLoopByCategory: selectedCategory"></app-posts-loop>
+        <br>
+        <br>
+        <button class="btn btn-primary" [routerLink]="['new']">Create a new Post!</button>
+    </div>
 </div>
