@@ -34,7 +34,7 @@ export class PostFormComponent implements OnInit {
     this.initForm();
     this.store.select('postsState').subscribe( res => {
       if (!this.selectedPost && res.posts.length > 0) {
-        this.selectedPost = res.posts.filter( v => v.id === this.postID)[0];
+        this.selectedPost = res.posts.filter( v => v.postID === this.postID)[0];
         if (this.selectedPost) {
           this.patchForm();
           this.formPost.created = this.selectedPost.created;
@@ -43,8 +43,8 @@ export class PostFormComponent implements OnInit {
     });
 
     this.store.select('authState').subscribe( authState => {
-      this.formPost.user = authState.user.email;
-      this.formPost.uid = authState.user.userId;
+      this.formPost.userEmail = authState.user.email;
+      this.formPost.postUserID = authState.user.userId;
     });
 
     this.form.valueChanges.subscribe( () => this.updateOutput());
@@ -65,7 +65,7 @@ export class PostFormComponent implements OnInit {
 
   onSubmit() {
     if (this.postID) {
-      this.formPost.id = this.selectedPost.id;
+      this.formPost.postID = this.selectedPost.postID;
       this.store.dispatch( new OnUpdatePost(this.formPost) );
     } else {
       this.formPost.created = new Date();

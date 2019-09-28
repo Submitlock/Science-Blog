@@ -50,7 +50,7 @@ export class TransformToHTMLPipe implements PipeTransform {
           <h1 class='text-center my-4'> ${formPost.title} </h1>
           <p class='text-center'>
             <span style="color: #999">
-              ${formPost.user} | ${formatDate} | <span style="color: ${color}"><b>${formPost.category}</b></span>
+              ${formPost.userEmail} | ${formatDate} | <span style="color: ${color}"><b>${formPost.category}</b></span>
             </span>
           </p>
           <hr>

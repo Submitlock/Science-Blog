@@ -23,6 +23,7 @@ export class AppComponent implements OnInit {
   loggedUser: UserModel;
   posts: PostModel[] = [];
   show = false;
+  loading = true;
 
   changeState() {
     this.show = !this.show;
@@ -40,10 +41,6 @@ export class AppComponent implements OnInit {
       this.store.dispatch( new postsActions.OnFetchPosts() );
       console.log('Fetch Triggered');
     }
-    // Testing purpose
-    // this.store.select('postsState').subscribe( res => {
-    //   this.posts = res.posts;
-    // });
   }
 
   onShowModal(event: boolean) {

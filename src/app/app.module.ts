@@ -38,6 +38,8 @@ import { RegisterFormComponent } from './features/auth/components/register-form/
 import { ConfirmPasswordDirective } from './directives/confirm-password.directive';
 import { CatToColorPipe } from './pipes/cat-to-color.pipe';
 import { InterceptorService } from './features/posts/store/interceptor.service';
+import { CommentFormComponent } from './features/posts/components/comment-form/comment-form.component';
+import { CommentsEffects } from './features/posts/store/comments.effects';
 
 @NgModule({
   declarations: [
@@ -67,6 +69,7 @@ import { InterceptorService } from './features/posts/store/interceptor.service';
     RegisterFormComponent,
     ConfirmPasswordDirective,
     CatToColorPipe,
+    CommentFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -75,7 +78,7 @@ import { InterceptorService } from './features/posts/store/interceptor.service';
     FormsModule,
     ReactiveFormsModule,
     StoreModule.forRoot(appReducer),
-    EffectsModule.forRoot([AuthEffects, PostsEffects]),
+    EffectsModule.forRoot([AuthEffects, PostsEffects, CommentsEffects]),
     HttpClientModule,
     NgxEditorModule,
   ],

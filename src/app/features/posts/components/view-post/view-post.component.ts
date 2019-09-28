@@ -20,19 +20,20 @@ export class ViewPostComponent implements OnInit {
 
   loading = false;
   userMatchPostUser = false;
-  postID = this.route.snapshot.params.id;
+  postID: string;
   loggedUser: UserModel;
 
   ngOnInit() {
+    this.postID = this.route.snapshot.params.id;
     this.store.subscribe(res => {
+      this.loading = res.postsState.loading;
       if (!this.post) {
-        this.post = res.postsState.posts.filter( v => v.id === this.postID)[0];
+        this.post = res.postsState.posts.filter( v => v.postID === this.postID)[0];
       }
       if (res.authState.user) {
         this.loggedUser = res.authState.user;
-        this.userMatchPostUser = this.post.user === res.authState.user.email ? true : false;
+        this.userMatchPostUser = this.post.userEmail === res.authState.user.email ? true : false;
       }
-      this.loading = res.postsState.loading;
     });
   }
 

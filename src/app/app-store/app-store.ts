@@ -1,13 +1,16 @@
 import { ActionReducerMap } from '@ngrx/store';
 import * as authReducer from '../features/auth/store/auth.reducer';
-import * as postReducer from './../features/posts/store/posts.reducer';
+import * as postsReducer from './../features/posts/store/posts.reducer';
+import * as commentsReducer from './../features/posts/store/comments.reducer';
 
 export interface AppState {
     authState: authReducer.State;
-    postsState: postReducer.State;
+    postsState: postsReducer.State;
+    commentsState: commentsReducer.State;
 }
 
 export const appReducer: ActionReducerMap<AppState> = {
     authState: authReducer.authReducer,
-    postsState: postReducer.PostsReducer
+    postsState: postsReducer.PostsReducer,
+    commentsState: commentsReducer.CommentsReducer
 };

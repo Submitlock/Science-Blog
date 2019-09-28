@@ -23,9 +23,9 @@ export class LoggedInProtectionService implements CanActivate {
         // IF THERE IS POST ID
         const postID = route.params.id;
         if (postID) {
-          const getPost = store.postsState.posts.filter( post => post.id === postID )[0];
+          const getPost = store.postsState.posts.filter( post => post.postID === postID )[0];
           if (getPost) {
-            if (getPost.user === loggedUser.email) {
+            if (getPost.userEmail === loggedUser.email) {
               console.log('Route permited. Post user mathces logged user');
               return true;
             }

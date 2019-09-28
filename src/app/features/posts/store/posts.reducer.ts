@@ -45,7 +45,7 @@ export function PostsReducer(state = initialState, action: postsActions.PostsAct
             return {
                 ...state,
                 loading: false,
-                posts: state.posts.filter(v => v.id !== action.payload)
+                posts: state.posts.filter(v => v.postID !== action.payload)
             };
         case postsActions.ON_UPDATE_POST:
             return {
@@ -55,7 +55,7 @@ export function PostsReducer(state = initialState, action: postsActions.PostsAct
         case postsActions.UPDATE_POST:
             const posts = [...state.posts];
             const updatedPost = action.payload;
-            const index = posts.findIndex( v => v.id === updatedPost.id);
+            const index = posts.findIndex( v => v.postID === updatedPost.postID);
             posts[index] = updatedPost;
             return {
                 ...state,

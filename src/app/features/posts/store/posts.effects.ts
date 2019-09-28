@@ -1,8 +1,9 @@
+import { CommentsModel } from './../models/comments.model';
 import { AppState } from './../../../app-store/app-store';
 import { Store } from '@ngrx/store';
 import { PostModel } from './../models/post.model';
 import { Injectable } from '@angular/core';
-import { Actions, Effect, ofType } from '@ngrx/effects';
+import { Actions, Effect, ofType, act } from '@ngrx/effects';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import * as postsActions from './posts.actions';
 import { exhaustMap, map, catchError } from 'rxjs/operators';
@@ -20,17 +21,18 @@ export class PostsEffects {
   onAddPost = this.actions$.pipe(
       ofType(postsActions.ON_ADD_POST),
       exhaustMap( (action: postsActions.OnAddPost) => {
-          return this.http.post<{name: string}>(fireBaseURL + 'posts/' + action.payload.uid + '.json', action.payload)
+          return this.http.post<{name: string}>(fireBaseURL + 'posts/' + action.payload.postUserID + '.json', action.payload)
                 .pipe(
                     map( res => {
                         const newPost = new PostModel(
-                            action.payload.user,
+                            res.name,
+                            action.payload.postUserID,
+                            action.payload.userEmail,
                             action.payload.created,
+                            action.payload.category,
                             action.payload.title,
                             action.payload.image,
-                            action.payload.category,
                             action.payload.content,
-                            res.name
                         );
                         this.router.navigate(['/blog', res.name ]);
                         return new postsActions.AddPost(newPost);
@@ -51,20 +53,23 @@ export class PostsEffects {
             .pipe(
                 map( res => {
                     const posts: PostModel[] = [];
+                    if (res) {
                     Object.keys(res).map( userID => {
                         Object.keys(res[userID]).map( postID => {
                             const post = new PostModel(
-                                res[userID][postID].user,
+                                postID,
+                                res[userID][postID].postUserID,
+                                res[userID][postID].userEmail,
                                 new Date(res[userID][postID].created),
+                                res[userID][postID].category,
                                 res[userID][postID].title,
                                 res[userID][postID].image,
-                                res[userID][postID].category,
                                 res[userID][postID].content,
-                                postID
                             );
                             posts.push(post);
                         });
                     });
+                    }
                     return new postsActions.FetchPosts(posts);
                 }),
                 catchError(err => {
@@ -98,18 +103,19 @@ export class PostsEffects {
         ofType(postsActions.ON_UPDATE_POST),
         exhaustMap( (action: postsActions.OnUpdatePost) => {
             const updatedPost = new PostModel(
-                action.payload.user,
+                action.payload.postID,
+                action.payload.postUserID,
+                action.payload.userEmail,
                 action.payload.created,
+                action.payload.category,
                 action.payload.title,
                 action.payload.image,
-                action.payload.category,
                 action.payload.content,
-                action.payload.id
             );
-            return this.http.put(`${fireBaseURL}posts/${action.payload.id}.json`, updatedPost)
+            return this.http.put(`${fireBaseURL}posts/${action.payload.postUserID}/${action.payload.postID}.json`, updatedPost)
             .pipe(
                 map( () => {
-                    this.router.navigate(['/blog', updatedPost.id]);
+                    this.router.navigate(['/blog', updatedPost.postID]);
                     return new postsActions.UpdatePost(updatedPost);
                 }),
                 catchError(err => {
