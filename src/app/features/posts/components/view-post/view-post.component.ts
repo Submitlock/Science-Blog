@@ -1,3 +1,4 @@
+import { CommentsModel } from './../../models/comments.model';
 import { UserModel } from './../../../auth/models/user.model';
 import { Component, OnInit, Input } from '@angular/core';
 import { FormPostType, PostModel } from '../../models/post.model';
@@ -5,6 +6,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app-store/app-store';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OnDeletePost } from '../../store/posts.actions';
+import { OnFetchComments } from '../../store/comments.actions';
 
 @Component({
   selector: 'app-view-post',
@@ -22,6 +24,8 @@ export class ViewPostComponent implements OnInit {
   userMatchPostUser = false;
   postID: string;
   loggedUser: UserModel;
+  comments: CommentsModel[] = [];
+  commentsLoading: boolean;
 
   ngOnInit() {
     this.postID = this.route.snapshot.params.id;
@@ -34,7 +38,12 @@ export class ViewPostComponent implements OnInit {
         this.loggedUser = res.authState.user;
         this.userMatchPostUser = this.post.userEmail === res.authState.user.email ? true : false;
       }
+      this.comments = res.commentsState.comments.filter( v => v.postID === this.postID);
+      this.commentsLoading = res.commentsState.loading;
     });
+    if (!this.comments.length) {
+      this.store.dispatch(new OnFetchComments(this.postID));
+    }
   }
 
   deletePost() {

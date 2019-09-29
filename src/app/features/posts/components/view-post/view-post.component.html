@@ -5,5 +5,7 @@
         <button class="btn btn-warning mx-2" (click)="editPost()">Edit Post</button>
         <button class="btn btn-danger mx-2" (click)="deletePost()">Delete Post</button>
     </div>
-    <app-comment-form *ngIf="showOptions" [post]="post" [loggedUser]="loggedUser"></app-comment-form>
+    <app-comment-form *ngIf="showOptions && loggedUser" [post]="post" [loggedUser]="loggedUser"></app-comment-form>
+    <h5 class="text-center" *ngIf="commentsLoading">Comments Loading ...</h5>
+    <app-comments-loop [comments]="comments" [loggedUser]="loggedUser" *ngIf="!commentsLoading"></app-comments-loop>
 </div>

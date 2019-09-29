@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType, act } from '@ngrx/effects';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import * as postsActions from './posts.actions';
-import { exhaustMap, map, catchError } from 'rxjs/operators';
+import { exhaustMap, map, catchError, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { Router } from '@angular/router';
 

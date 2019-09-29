@@ -32,6 +32,7 @@ export class CommentFormComponent implements OnInit {
       new Date(),
       form.value.content,
     );
+    form.setValue({content: null});
     this.store.dispatch(new OnAddComment(newComment));
   }
 

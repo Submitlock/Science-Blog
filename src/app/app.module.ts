@@ -40,6 +40,8 @@ import { CatToColorPipe } from './pipes/cat-to-color.pipe';
 import { InterceptorService } from './features/posts/store/interceptor.service';
 import { CommentFormComponent } from './features/posts/components/comment-form/comment-form.component';
 import { CommentsEffects } from './features/posts/store/comments.effects';
+import { CommentsLoopComponent } from './features/posts/components/comments-loop/comments-loop.component';
+import { CommentBodyComponent } from './features/posts/components/comments-loop/comment-body/comment-body.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +72,8 @@ import { CommentsEffects } from './features/posts/store/comments.effects';
     ConfirmPasswordDirective,
     CatToColorPipe,
     CommentFormComponent,
+    CommentsLoopComponent,
+    CommentBodyComponent,
   ],
   imports: [
     BrowserModule,

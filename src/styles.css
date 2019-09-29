@@ -38,3 +38,6 @@ button[title="Insert Video"] {
 .ngx-toolbar-set {
     flex-wrap: wrap!important;
 }
+.ngx-editor-textarea {
+    background: white!important;
+}

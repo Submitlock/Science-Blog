@@ -1,0 +1,5 @@
+<h4 class="text-center py-5" *ngIf="!comments.length"> Write this post's first comment! </h4>
+<div class="container py-5" *ngIf="comments.length > 0">
+    <h4 class="mb-5">Comments:</h4>
+    <app-comment-body *ngFor="let comment of comments" [comment]="comment" [loggedUser]="loggedUser"></app-comment-body>
+</div>

@@ -1,0 +1,10 @@
+<div class="pl-3 mb-4 comment-body">
+    <h6> {{comment.userEmail}} <span class="text-muted" style="font-size: 12px;">- {{comment.created | date:'short'}} </span> </h6>
+    <p [innerHTML]="comment.content | safeHTML">  </p>
+    <span
+        (click)="onDelete()" 
+        class="delete-btn text-danger"
+        *ngIf="showDeleteBtn">
+            <i class="fa fa-trash"></i>
+    </span>
+</div>
