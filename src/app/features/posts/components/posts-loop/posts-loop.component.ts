@@ -12,6 +12,7 @@ export class PostsLoopComponent implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute) { }
 
   @Input() posts: PostModel[];
+  @Input() error: string;
 
   ngOnInit() {
   }

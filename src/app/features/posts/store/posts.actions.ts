@@ -10,6 +10,8 @@ export const DELETE_POST = '[Posts] Delete post';
 export const ON_DELETE_POST = '[Posts] Send delete request';
 export const ON_UPDATE_POST = '[Posts] Send post/update request';
 export const UPDATE_POST = '[Post] Update Post';
+export const ERROR_POST = '[Post] Error from request';
+export const CLEAR_ERROR_POST = '[Post] Clear post error from request';
 
 export class AddPost implements Action {
     readonly type = ADD_POST;
@@ -50,4 +52,23 @@ export class UpdatePost implements Action {
     constructor(public payload: PostModel) {}
 }
 
-export type PostsActions = AddPost | OnAddPost | FetchPosts | OnFetchPosts | DeletePost | OnDeletePost | OnUpdatePost | UpdatePost;
+export class ErrorPost implements Action {
+    readonly type = ERROR_POST;
+    constructor(public payload: string) {}
+}
+
+export class ClearErrorPost implements Action {
+    readonly type = CLEAR_ERROR_POST;
+}
+
+export type PostsActions =
+                AddPost |
+                OnAddPost |
+                FetchPosts |
+                OnFetchPosts |
+                DeletePost |
+                OnDeletePost |
+                OnUpdatePost |
+                UpdatePost |
+                ErrorPost |
+                ClearErrorPost;

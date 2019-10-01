@@ -37,3 +37,16 @@ a {
     bottom: 0;
     transform: rotate(45deg); 
 }
+.header-btn {
+    background: linear-gradient(to right, #90d9ba, #f5865e)!important;
+    color: white!important;
+    border-radius: 5px;
+    font-weight: bold;
+    border: none;
+    transition: .2s ease;
+    letter-spacing: 3px;
+    padding: 8px 10px;
+}
+.header-btn:hover {
+    transform: scale(.94);
+}

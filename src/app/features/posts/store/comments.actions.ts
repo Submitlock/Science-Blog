@@ -7,6 +7,8 @@ export const ON_FETCH_COMMENTS = '[Comments] On Fetch comments';
 export const FETCH_COMMENTS = '[Comments] Fetch comments';
 export const ON_DELETE_COMMENT = '[Comments] On delete comment';
 export const DELETE_COMMENT = '[Comments] Delete comment';
+export const ERROR_COMMENT = '[Comments] Error on http response';
+export const CLEAR_ERROR_COMMENT = '[Comments] Clear error';
 
 export class OnAddComment implements Action {
     readonly type = ON_ADD_COMMENT;
@@ -32,6 +34,21 @@ export class DeleteComment implements Action {
     readonly type = DELETE_COMMENT;
     constructor(public payload: string) {}
 }
+export class ErrorComment implements Action {
+    readonly type = ERROR_COMMENT;
+    constructor(public payload: string) {}
+}
+export class ClearErrorComment implements Action {
+    readonly type = CLEAR_ERROR_COMMENT;
+}
 
-export type CommentsActions = AddComment | FetchComments | OnAddComment | OnFetchComments | OnDeleteComment | DeleteComment;
+export type CommentsActions =
+    AddComment |
+    FetchComments |
+    OnAddComment |
+    OnFetchComments |
+    OnDeleteComment |
+    DeleteComment |
+    ErrorComment |
+    ClearErrorComment;
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { slideInOut } from 'src/app/animations/animations';
 
 @Component({
@@ -12,9 +12,14 @@ export class AlertMsgComponent implements OnInit {
   constructor() { }
 
   @Input() class: string;
+  @Output() emitHideAlert = new EventEmitter();
   hideAlert = false;
 
   ngOnInit() {
   }
 
+  onHideAlert() {
+    this.hideAlert = true;
+    this.emitHideAlert.emit();
+  }
 }

@@ -10,7 +10,7 @@ import { SinglePostComponent } from '../pages/blog/single-post/single-post.compo
 const appRoutes: Routes = [
     { path: '', component: HomeComponent },
     { path: 'blog', component: BlogComponent},
-    {path: 'blog/new', component: NewPostComponent, canActivate: [LoggedInProtectionService]},
+    { path: 'blog/new', component: NewPostComponent, canActivate: [LoggedInProtectionService] },
     { path: 'blog/:id/edit', component: EditPostComponent, canActivate: [LoggedInProtectionService] },
     { path: 'blog/:id', component: SinglePostComponent},
 ];

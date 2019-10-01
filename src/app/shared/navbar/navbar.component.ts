@@ -18,11 +18,13 @@ export class NavbarComponent implements OnInit {
   loggedUser: UserModel;
 
   ngOnInit() {
+    // Load user if any
     this.store.select('authState').subscribe( res => {
       this.loggedUser = res.user;
     });
   }
 
+  // Triggers modal pop up
   onShowModal(event: Event) {
     event.preventDefault();
     this.toggleModal.emit(true);

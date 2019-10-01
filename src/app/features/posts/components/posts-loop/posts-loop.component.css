@@ -41,6 +41,7 @@
     color: white;
     background: black;
     border-radius: 5px;
+    z-index: 5;
 }
 .post-footer {
     color: #ffffffb3;

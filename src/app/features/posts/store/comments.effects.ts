@@ -1,21 +1,11 @@
 import { CommentsModel } from './../models/comments.model';
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app-store/app-store';
-import {
-    ON_ADD_COMMENT,
-    OnAddComment,
-    AddComment,
-    ON_FETCH_COMMENTS,
-    OnFetchComments,
-    FetchComments,
-    ON_DELETE_COMMENT,
-    OnDeleteComment,
-    DeleteComment
-} from './comments.actions';
+import * as fromCommentsActions from './comments.actions';
 import { exhaustMap, map, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 
@@ -27,8 +17,8 @@ export class CommentsEffects {
 
   @Effect()
     onAddComment = this.actions$.pipe(
-        ofType(ON_ADD_COMMENT),
-        exhaustMap( (action: OnAddComment) => {
+        ofType(fromCommentsActions.ON_ADD_COMMENT),
+        exhaustMap( (action: fromCommentsActions.OnAddComment) => {
             return this.http.post<{name: string}>(
                 `${fireBaseURL}/comments/${action.payload.postID}/${action.payload.userID}.json`, action.payload
                 ).pipe(
@@ -42,43 +32,34 @@ export class CommentsEffects {
                             action.payload.content,
                             res.name
                         );
-                        return new AddComment(newComment);
+                        return new fromCommentsActions.AddComment(newComment);
                     }),
-                    catchError( err => {
-                        console.log('Error has occured', err);
-                        return of();
-                    })
+                    catchError(this.hadnleError)
                 );
         })
     );
 
     @Effect()
     onFetchComments = this.actions$.pipe(
-        ofType(ON_FETCH_COMMENTS),
-        exhaustMap( (action: OnFetchComments) => {
+        ofType(fromCommentsActions.ON_FETCH_COMMENTS),
+        exhaustMap( (action: fromCommentsActions.OnFetchComments) => {
             return this.http.get(`${fireBaseURL}/comments/${action.payload}.json`)
                 .pipe(
                     map( this.handleOnFetchComments ),
-                    catchError(err => {
-                        console.log('Error ocured:', err);
-                        return of();
-                    })
+                    catchError(this.hadnleError)
                 );
         })
     );
 
     @Effect()
     onDeleteComment = this.actions$.pipe(
-        ofType(ON_DELETE_COMMENT),
-        exhaustMap( (action: OnDeleteComment) => {
+        ofType(fromCommentsActions.ON_DELETE_COMMENT),
+        exhaustMap( (action: fromCommentsActions.OnDeleteComment) => {
             return this.http.delete(
                 `${fireBaseURL}/comments/${action.payload.postID}/${action.payload.userID}/${action.payload.commentID}.json`
                 ).pipe(
-                    map( () => new DeleteComment(action.payload.commentID) ),
-                    catchError(err => {
-                        console.log('Error ocured:', err);
-                        return of();
-                    })
+                    map( () => new fromCommentsActions.DeleteComment(action.payload.commentID) ),
+                    catchError(this.hadnleError)
                 );
         })
     );
@@ -101,6 +82,10 @@ export class CommentsEffects {
                 });
             });
         }
-        return new FetchComments(comments);
+        return new fromCommentsActions.FetchComments(comments);
+    }
+
+    hadnleError(err: HttpErrorResponse) {
+        return of(new fromCommentsActions.ErrorComment(err.error.error + '!'));
     }
 }

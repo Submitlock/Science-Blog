@@ -6,12 +6,12 @@
         (click)="selectPost(post.postID)">
             <span class="post-item-category" [ngStyle]="{'background': post.category | catToColor}">{{post.category}}</span>
             <div class="post-item-meta">
-                <h3> {{ post.title }} </h3>
+                <h4> {{ post.title }} </h4>
                 <div class="post-footer d-flex justify-content-between">
                     <span>{{post.user}}</span> 
                     <span>{{post.created | date:'mediumDate' }}</span>
                 </div>
             </div>
     </div>
-    <h4 class="text-center" *ngIf="posts.length === 0">No Posts to show...</h4>
+    <h4 class="text-center" *ngIf="posts.length === 0 && !error">No Posts to show...</h4>
 </div>

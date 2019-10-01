@@ -15,15 +15,14 @@ export class EditPostComponent implements OnInit {
 
   post: FormPostType;
   postID: string;
-  loading = false;
+  error: string = null;
 
   ngOnInit() {
     this.postID = this.route.snapshot.params.id;
-    this.store.select('postsState').subscribe( res => this.loading = res.loading);
+    this.store.select('postsState').subscribe( postsState => this.error = postsState.error);
   }
 
   onContentEmit(post: FormPostType) {
     this.post = post;
   }
-
 }

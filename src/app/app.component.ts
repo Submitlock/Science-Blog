@@ -17,39 +17,27 @@ export class AppComponent implements OnInit {
 
   constructor(private store: Store<AppState>) {}
 
-  title = 'science-blog';
+  title = 'Science-blog';
+
   showModal = false;
-
   loggedUser: UserModel;
-  posts: PostModel[] = [];
   show = false;
-  loading = true;
-
-  changeState() {
-    this.show = !this.show;
-  }
 
   ngOnInit() {
+    // Trigger auto login
+    this.store.dispatch( new fromAuthActions.AutoLogin() );
+    // Hide modal auth if logged in
     this.store.select('authState').subscribe( res => {
       this.loggedUser = res.user;
       if (this.loggedUser) {
         this.showModal = false;
       }
     });
-    this.store.dispatch( new fromAuthActions.AutoLogin() );
-    if (this.posts.length === 0) {
-      this.store.dispatch( new postsActions.OnFetchPosts() );
-      console.log('Fetch Triggered');
-    }
+    // Trigger fetch posts
+    this.store.dispatch( new postsActions.OnFetchPosts() );
   }
 
-  onShowModal(event: boolean) {
-    if (!event) {
-      this.store.dispatch( new fromAuthActions.ClearError() );
-    }
-    this.showModal = event;
-  }
-
+  // Toggle auth modal and clear http error if hidden
   onToggleModal(event: boolean) {
     if (!event) {
       this.store.dispatch( new fromAuthActions.ClearError() );

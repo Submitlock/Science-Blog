@@ -1,6 +1,4 @@
-<app-spinner *ngIf="loading"></app-spinner>
-
-<div class="page-container" *ngIf="!loading">
+<div class="page-container">
     <h4 class="text-center">Edit Panel</h4>
     <div class="edit-panel">
         <app-post-form (emitContent)="onContentEmit($event)" [postID]="postID"></app-post-form>

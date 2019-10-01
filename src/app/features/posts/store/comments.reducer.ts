@@ -1,6 +1,5 @@
 import { CommentsModel } from './../models/comments.model';
-import { CommentsActions, ADD_COMMENT, FETCH_COMMENTS, ON_ADD_COMMENT, ON_FETCH_COMMENTS, ON_DELETE_COMMENT, DELETE_COMMENT } from './comments.actions';
-
+import * as fromCommentsActions from './comments.actions';
 export interface State {
     comments: CommentsModel[];
     loading: boolean;
@@ -13,41 +12,53 @@ const initialState: State = {
     error: null,
 };
 
-export function CommentsReducer(state = initialState, action: CommentsActions) {
+export function CommentsReducer(state = initialState, action: fromCommentsActions.CommentsActions) {
     switch (action.type) {
-        case ON_ADD_COMMENT:
+        case fromCommentsActions.ON_ADD_COMMENT:
             return {
                 ...state,
                 loading: true
             };
-        case ADD_COMMENT:
+        case fromCommentsActions.ADD_COMMENT:
             return {
                 ...state,
                 loading: false,
                 comments: [...state.comments, action.payload]
             };
-        case ON_FETCH_COMMENTS:
+        case fromCommentsActions.ON_FETCH_COMMENTS:
             return {
                 ...state,
                 loading: true
             };
-        case FETCH_COMMENTS:
+        case fromCommentsActions.FETCH_COMMENTS:
             return {
                 ...state,
                 loading: false,
                 comments: [...state.comments, ...action.payload]
             };
-        case ON_DELETE_COMMENT:
+        case fromCommentsActions.ON_DELETE_COMMENT:
             return {
                 ...state,
                 loading: true,
             };
-        case DELETE_COMMENT:
+        case fromCommentsActions.DELETE_COMMENT:
             return {
                 ...state,
                 loading: false,
                 comments: state.comments.filter( v => v.commentID !== action.payload)
             };
+        case fromCommentsActions.ERROR_COMMENT:
+                return {
+                    ...state,
+                    loading: false,
+                    error: action.payload
+                };
+        case fromCommentsActions.CLEAR_ERROR_COMMENT:
+                return {
+                    ...state,
+                    loading: false,
+                    error: null
+                };
         default:
             return state;
     }

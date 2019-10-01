@@ -1,5 +1,7 @@
+import { AppState } from './../../../app-store/app-store';
 import { Component, OnInit } from '@angular/core';
 import { FormPostType } from 'src/app/features/posts/models/post.model';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-new-post',
@@ -8,7 +10,7 @@ import { FormPostType } from 'src/app/features/posts/models/post.model';
 })
 export class NewPostComponent implements OnInit {
 
-  constructor() { }
+  constructor(private store: Store<AppState>) { }
 
   passPostContent: FormPostType;
 

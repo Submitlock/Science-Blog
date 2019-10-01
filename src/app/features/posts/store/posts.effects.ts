@@ -1,12 +1,11 @@
-import { CommentsModel } from './../models/comments.model';
 import { AppState } from './../../../app-store/app-store';
 import { Store } from '@ngrx/store';
 import { PostModel } from './../models/post.model';
 import { Injectable } from '@angular/core';
-import { Actions, Effect, ofType, act } from '@ngrx/effects';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { Actions, Effect, ofType } from '@ngrx/effects';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import * as postsActions from './posts.actions';
-import { exhaustMap, map, catchError, tap } from 'rxjs/operators';
+import { exhaustMap, map, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { Router } from '@angular/router';
 
@@ -37,10 +36,7 @@ export class PostsEffects {
                         this.router.navigate(['/blog', res.name ]);
                         return new postsActions.AddPost(newPost);
                     }),
-                    catchError(err => {
-                        console.log(err);
-                        return  of();
-                    })
+                    catchError(this.hadnleError)
                 );
       })
   );
@@ -72,10 +68,7 @@ export class PostsEffects {
                     }
                     return new postsActions.FetchPosts(posts);
                 }),
-                catchError(err => {
-                    console.log(err);
-                    return  of();
-                })
+                catchError(this.hadnleError)
             );
       })
   );
@@ -90,10 +83,7 @@ export class PostsEffects {
                     this.router.navigate(['/blog']);
                     return new postsActions.DeletePost(action.payload.postID);
                 }),
-                catchError(err => {
-                    console.log(err);
-                    return  of();
-                })
+                catchError(this.hadnleError)
             );
         })
     );
@@ -118,11 +108,12 @@ export class PostsEffects {
                     this.router.navigate(['/blog', updatedPost.postID]);
                     return new postsActions.UpdatePost(updatedPost);
                 }),
-                catchError(err => {
-                    console.log(err);
-                    return  of();
-                })
+                catchError(this.hadnleError)
             );
         })
     );
+
+    hadnleError(err: HttpErrorResponse) {
+        return of(new postsActions.ErrorPost(err.error.error + '!'));
+    }
 }
